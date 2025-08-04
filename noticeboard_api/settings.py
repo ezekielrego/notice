@@ -30,6 +30,10 @@ ALLOWED_HOSTS = [
     'api.noticeboard.co.zw',
     'localhost',
     '127.0.0.1',
+    '*.app.github.dev',  # GitHub Codespaces
+    '.gitpod.io',        # GitPod
+    '.repl.co',          # Replit
+    '*.ngrok.io',        # ngrok tunnels
 ]
 
 
@@ -146,6 +150,17 @@ REST_FRAMEWORK = {
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+# CSRF Settings for cloud development environments
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.app.github.dev',  # GitHub Codespaces
+    'https://*.gitpod.io',       # GitPod
+    'https://*.repl.co',         # Replit
+    'https://*.ngrok.io',        # ngrok tunnels
+    'http://localhost:8000',     # Local development
+    'http://127.0.0.1:8000',     # Local development
+    'https://api.noticeboard.co.zw',  # Production
+]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
