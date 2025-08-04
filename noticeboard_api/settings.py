@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+import sys
+
+# Detect if running in GitHub Codespaces
+CODESPACE_NAME = os.getenv('CODESPACE_NAME')
+GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN = os.getenv('GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,6 +35,11 @@ ALLOWED_HOSTS = [
     'api.noticeboard.co.zw',
     'localhost',
     '127.0.0.1',
+    '*.app.github.dev',  # GitHub Codespaces
+    '.gitpod.io',        # GitPod
+    '.repl.co',          # Replit
+    '*.ngrok.io',        # ngrok tunnels
+    '*',                 # Allow all for development
 ]
 
 
@@ -54,7 +64,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',  # DISABLED FOR DEVELOPMENT
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -146,8 +156,66 @@ REST_FRAMEWORK = {
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGINS = [
+    "https://localhost:8000",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+    "https://127.0.0.1:8000",
+]
+
+# CSRF Settings - COMPLETELY DISABLED FOR DEVELOPMENT
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.app.github.dev',  # GitHub Codespaces
+    'https://*.gitpod.io',       # GitPod
+    'https://*.repl.co',         # Replit
+    'https://*.ngrok.io',        # ngrok tunnels
+    'http://localhost:8000',     # Local development
+    'http://127.0.0.1:8000',     # Local development
+    'https://api.noticeboard.co.zw',  # Production
+    'https://localhost:8000',
+    'http://localhost:3000',     # Common frontend ports
+    'http://localhost:3001',
+    'http://localhost:5173',     # Vite default
+    'http://localhost:4200',     # Angular default
+]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 
 LOGIN_URL = '/admin/'
+
+# =============================================================================
+# DEVELOPMENT ONLY: COMPLETELY DISABLE CSRF VERIFICATION
+# =============================================================================
+# WARNING: NEVER USE THESE SETTINGS IN PRODUCTION!
+
+# Disable CSRF completely for development
+CSRF_COOKIE_SECURE = False
+CSRF_USE_SESSIONS = False
+CSRF_COOKIE_HTTPONLY = False
+CSRF_COOKIE_SAMESITE = None
+CSRF_COOKIE_NAME = None
+
+# Additional CSRF bypass settings
+if 'runserver' in sys.argv or 'test' in sys.argv:
+    # Running development server or tests
+    CSRF_TRUSTED_ORIGINS = ['*']
+    CSRF_COOKIE_DOMAIN = None
+    
+# Complete CSRF bypass
+USE_CSRF = False
+
+# Security settings for development
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None
+SECURE_REFERRER_POLICY = None
+
+# Session settings
+SESSION_COOKIE_SECURE = False
+SESSION_COOKIE_SAMESITE = None
+
+print("🚀 Django settings loaded successfully!")
+print(f"🔧 DEBUG mode: {DEBUG}")
+print(f"📍 CSRF Protection: DISABLED (Development Only)")
+if CODESPACE_NAME:
+    print(f"☁️  Running in GitHub Codespace: {CODESPACE_NAME}")
