@@ -1,0 +1,26 @@
+from django.contrib import admin
+from .models import (
+    User, Category, Tag, Business, BusinessLocation, BusinessHours, Staff, BusinessMedia, BusinessRating, StaffRating, TicketType, Ticket, MessageThread, Message, FavoriteBusiness, Notification, Subscription, Product, ProductNegotiation, ChatRoom, ChatMessage
+)
+
+admin.site.register(User)
+admin.site.register(Category)
+admin.site.register(Tag)
+admin.site.register(Business)
+admin.site.register(BusinessLocation)
+admin.site.register(BusinessHours)
+admin.site.register(Staff)
+admin.site.register(BusinessMedia)
+admin.site.register(BusinessRating)
+admin.site.register(StaffRating)
+admin.site.register(TicketType)
+admin.site.register(Ticket)
+admin.site.register(MessageThread)
+admin.site.register(Message)
+admin.site.register(FavoriteBusiness)
+admin.site.register(Notification)
+admin.site.register(Subscription)
+admin.site.register(Product)
+admin.site.register(ProductNegotiation)
+admin.site.register(ChatRoom)
+admin.site.register(ChatMessage)

@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 1</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary: rgb(12, 12, 207);
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--light);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Form */
+        .glass-form {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .form-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            color: var(--light);
+            font-family: 'Poppins', sans-serif;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-button {
+            background: linear-gradient(to right, var(--accent), #f43f5e);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+        }
+
+        .form-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(236, 72, 153, 0.4);
+        }
+
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        @media (max-width: 1024px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: center;
+                gap: 1.2rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .logo {
+                margin-bottom: 0.5rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 0.8rem;
+                width: 100%;
+                align-items: center;
+            }
+
+            .nav-links a {
+                width: 90%;
+                text-align: center;
+                padding: 0.7rem 0;
+                font-size: 1.1rem;
+            }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            height: 340px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-image-container {
+            position: relative;
+            height: 140px;
+            flex-shrink: 0;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            z-index: 1;
+        }
+
+        .verified {
+            background: linear-gradient(to right, #10b981, #34d399);
+        }
+
+        .card-profile {
+            position: absolute;
+            bottom: -1.5rem;
+            left: 1.5rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        .card-content {
+            padding: 1.5rem 1.5rem 1rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-motto {
+            font-size: 0.85rem;
+            line-height: 1.4;
+            margin-bottom: 0.8rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-stats {
+            display: flex;
+            justify-content: space-between;
+            margin: 0.5rem 0 1rem;
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.9rem;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: auto;
+            padding-top: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .action-button {
+            flex: 1;
+            padding: 0.5rem;
+            border-radius: 8px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .action-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Bubbles background - UPDATED */
+        .bubbles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            animation: rise 10s infinite ease-in;
+            pointer-events: none;
+        }
+
+        @keyframes rise {
+            0% {
+                bottom: -100px;
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(100px);
+            }
+
+            100% {
+                bottom: 1000px;
+                transform: translateX(-200px);
+            }
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 26px;
+            height: 3px;
+            margin: 4px 0;
+            background: var(--light);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        @media (max-width: 600px) {
+            .header {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                gap: 0;
+                margin-bottom: 1.5rem;
+            }
+
+            .logo {
+                margin-bottom: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 60px;
+                right: 16px;
+                background: rgba(255, 255, 255, 0.12);
+                backdrop-filter: blur(14px);
+                border-radius: 20px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+                border: 1px solid rgba(255, 255, 255, 0.22);
+                flex-direction: column;
+                gap: 0.8rem;
+                width: 200px;
+                align-items: flex-start;
+                padding: 1.2rem 1rem;
+                transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1), transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: 1000;
+                display: flex;
+                opacity: 0;
+                pointer-events: none;
+                transform: translateY(-20px) scale(0.98);
+            }
+
+            .nav-links.open {
+                opacity: 1;
+                pointer-events: auto;
+                transform: translateY(0) scale(1);
+            }
+
+            .nav-links a {
+                width: 100%;
+                text-align: left;
+                padding: 0.7rem 0.5rem;
+                font-size: 1.1rem;
+                opacity: 0;
+                transform: translateY(-10px);
+                transition: opacity 0.3s, transform 0.3s;
+            }
+
+            .nav-links.open a {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .nav-links.open a:nth-child(1) {
+                transition-delay: 0.08s;
+            }
+
+            .nav-links.open a:nth-child(2) {
+                transition-delay: 0.16s;
+            }
+
+            .nav-links.open a:nth-child(3) {
+                transition-delay: 0.24s;
+            }
+
+            .nav-links.open a:nth-child(4) {
+                transition-delay: 0.32s;
+            }
+        }
+
+        /* Optional: animate hamburger to X when open */
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* Color picker button */
+        .color-picker-button {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .color-picker-button svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--light);
+        }
+
+        .color-picker-input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        /* Hero area */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 2rem;
+        }
+
+        .hero-bg-container {
+            position: relative;
+            width: 100vw;
+            min-height: 320px;
+            margin-bottom: 2.5rem;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            box-sizing: border-box;
+            border-radius: 2.5rem;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100vw;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: auto;
+            user-select: none;
+            border-radius: 0 0 2.5rem 2.5rem;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: linear-gradient(to bottom, var(--primary) 0%, transparent 100%);
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .hero-waves {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-waves svg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            fill: none;
+            pointer-events: none;
+        }
+
+        .hero-waves svg path {
+            opacity: 0.5;
+        }
+
+        .hero-waves svg linearGradient {
+            stop {
+                stop-color: var(--primary);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+            padding: 0 2rem;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .hero-cta {
+            background: linear-gradient(to right, var(--accent), #f43f5e);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(236, 72, 153, 0.4);
+        }
+
+        .hero-bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            pointer-events: none;
+            border-radius: 0 0 2.5rem 2.5rem;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="bubbles" id="bubbles"></div>
+
+    <header class="header">
+        <div class="logo">
+            <img src="file:///C:/Users/Ezekiel%20Rego/Downloads/nb.png" alt="NB" style="height: 24px;">
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav class="nav-links" id="navLinks">
+            <a href="#">Home</a>
+            <a href="#">Explore</a>
+            <a href="#">Messages</a>
+            <a href="#">Profile</a>
+        </nav>
+    </header>
+
+    <div class="hero-bg-container">
+        <div class="hero-bg" id="heroBg">
+            <img src="C:\Users\Ezekiel Rego\Desktop\notice\bg.jpg" alt="Hero Background" class="hero-bg-image" />
+            <div class="hero-overlay-glass">
+                <div class="hero-overlay-content">
+                    <!-- SAY HELLO TO ZIMBABWE -->
+                </div>
+            </div>
+            <!-- Animated SVG Waves -->
+            <svg class="waves" viewBox="0 0 1440 320" preserveAspectRatio="none">
+                <defs>
+                    <linearGradient id="waveGradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop id="waveStop1" offset="0%" stop-color="var(--primary)" />
+                        <stop id="waveStop2" offset="100%" stop-color="#8b5cf6" />
+                    </linearGradient>
+                </defs>
+                <path id="wave1" fill="url(#waveGradient)" fill-opacity="0.7"
+                    d="M0,160L80,170C160,180,320,200,480,192C640,184,800,144,960,133.3C1120,123,1280,149,1360,162.7L1440,176L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z">
+                </path>
+                <path id="wave2" fill="url(#waveGradient)" fill-opacity="0.4"
+                    d="M0,200L80,186.7C160,173,320,147,480,154.7C640,163,800,205,960,197.3C1120,189,1280,131,1360,101.3L1440,72L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z">
+                </path>
+            </svg>
+            <!-- Floating Bubbles -->
+            <div class="hero-bubbles" id="heroBubbles"></div>
+            <!-- Ripples will be injected here -->
+            <canvas class="ripple-canvas" id="rippleCanvas"></canvas>
+        </div>
+        <!-- <div class="hero-glass">
+            <h1 class="hero-title">Welcome to Notice</h1>
+            <p class="hero-desc">Discover cool places, people, and more with a splash of style.</p>
+        </div> -->
+    </div>
+
+    <div class="container">
+        <!-- Grid -->
+        <div class="grid">
+            <!-- Card 1 -->
+            <div class="card">
+                <div class="card-image-container">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                        alt="Restaurant" class="card-image">
+                    <div class="card-badge verified">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                        Verified
+                    </div>
+                    <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Profile" class="card-profile">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Gourmet Haven</h3>
+                    <p class="card-motto">Fine dining experience</p>
+                    <div class="card-stats">
+                        <div class="stat">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                </path>
+                            </svg>
+                            248
+                        </div>
+                        <div class="stat">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                            1.2K
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="action-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                </path>
+                            </svg>
+                            Like
+                        </button>
+                        <button class="action-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                            Message
+                        </button>
+                        <button class="action-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                            View
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="card">
+                <div class="card-image-container">
+                    <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                        alt="Cafe" class="card-image">
+                    <div class="card-badge">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                        </svg>
+                        New
+                    </div>
+                    <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="Profile" class="card-profile">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Morning Brew</h3>
+                    <p class="card-motto">Artisanal coffee and homemade</p>
+                    <div class="card-stats">
+                        <div class="stat">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                </path>
+                            </svg>
+                            187
+                        </div>
+                        <div class="stat">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                            856
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="action-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                </path>
+                            </svg>
+                            Like
+                        </button>
+                        <button class="action-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                            Message
+                        </button>
+                        <button class="action-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                            View
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="card">
+                <div class="card-image-container">
+                    <img src="https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                        alt="Bakery" class="card-image">
+                    <div class="card-badge verified">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                        Verified
+                    </div>
+                    <img src="https://randomuser.me/api/portraits/men/34.jpg" alt="Profile" class="card-profile">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Sweet Delights</h3>
+                    <p class="card-motto">Handcrafted desserts with love</p>
+                    <div class="card-stats">
+                        <div class="stat">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                </path>
+                            </svg>
+                            324
+                        </div>
+                        <div class="stat">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                            1.8K
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="action-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                </path>
+                            </svg>
+                            Like
+                        </button>
+                        <button class="action-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                            Message
+                        </button>
+                        <button class="action-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                            View
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="card">
+                <div class="card-image-container">
+                    <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                        alt="Bookstore" class="card-image">
+                    <div class="card-badge">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                        </svg>
+                        Popular
+                    </div>
+                    <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Profile" class="card-profile">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Page Turner</h3>
+                    <p class="card-motto">Curated books & cozy reading</p>
+                    <div class="card-stats">
+                        <div class="stat">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                </path>
+                            </svg>
+                            412
+                        </div>
+                        <div class="stat">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                            2.3K
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="action-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                </path>
+                            </svg>
+                            Like
+                        </button>
+                        <button class="action-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                            Message
+                        </button>
+                        <button class="action-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                            View
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create bubbles - UPDATED (doubled quantity to 40)
+        const bubblesContainer = document.getElementById('bubbles');
+        for (let i = 0; i < 40; i++) {
+            const bubble = document.createElement('div');
+            bubble.classList.add('bubble');
+            const size = Math.random() * 100 + 20;
+            bubble.style.width = `${size}px`;
+            bubble.style.height = `${size}px`;
+            bubble.style.left = `${Math.random() * 100}%`;
+            bubble.style.animationDelay = `${Math.random() * 5}s`;
+            bubble.style.opacity = Math.random() * 0.3 + 0.1;
+            bubblesContainer.appendChild(bubble);
+        }
+        // Hamburger menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+            hamburger.classList.toggle('open');
+        });
+    </script>
+
+    <style>
+        .hero-bg-container {
+            position: relative;
+            width: 100vw;
+            min-height: 320px;
+            margin-bottom: 2.5rem;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            box-sizing: border-box;
+            border-radius: 2.5rem;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100vw;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: auto;
+            user-select: none;
+            border-radius: 0 0 2.5rem 2.5rem;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: linear-gradient(to bottom, var(--primary) 0%, transparent 100%);
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .waves {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .hero-bubbles {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .ripple-canvas {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 4;
+            pointer-events: none;
+        }
+
+        .hero-glass {
+            position: relative;
+            z-index: 10;
+            margin: 0 auto;
+            margin-bottom: 1.5rem;
+            background: rgba(255, 255, 255, 0.13);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 2.5rem 2rem 2rem 2rem;
+            max-width: 520px;
+            text-align: center;
+            backdrop-filter: blur(12px);
+        }
+
+        .hero-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--light);
+            margin-bottom: 0.7rem;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 12px rgba(12, 12, 207, 0.18);
+        }
+
+        .hero-desc {
+            font-size: 1.15rem;
+            color: var(--light);
+            opacity: 0.85;
+            font-weight: 400;
+            text-shadow: 0 1px 8px rgba(139, 92, 246, 0.13);
+        }
+
+        @media (max-width: 700px) {
+            .hero-glass {
+                padding: 1.5rem 0.7rem 1.2rem 0.7rem;
+            }
+
+            .hero-title {
+                font-size: 1.3rem;
+            }
+
+            .hero-bg-container {
+                min-height: 180px;
+            }
+        }
+
+        .hero-overlay-glass {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 30;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 90vw;
+            max-width: 420px;
+            pointer-events: none;
+        }
+
+        .hero-overlay-content {
+            width: 100%;
+            background: transparent !important;
+            border-radius: 2rem;
+            box-shadow: none;
+            border: none;
+            padding: 2rem 2.2rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            text-align: center;
+            letter-spacing: 1.5px;
+            text-shadow: 0 2px 16px rgba(12, 12, 207, 0.13), 0 1px 0 #fff;
+            backdrop-filter: none;
+            filter: drop-shadow(0 2px 12px rgba(12, 12, 207, 0.10));
+            pointer-events: auto;
+        }
+
+        @media (max-width: 700px) {
+            .hero-overlay-content {
+                font-size: 1rem;
+                padding: 1.1rem 0.7rem;
+            }
+        }
+
+        .hero-bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            pointer-events: none;
+            border-radius: 0 0 2.5rem 2.5rem;
+        }
+    </style>
+
+    <script>
+        // --- Animated Waves ---
+        const wave1 = document.getElementById('wave1');
+        const wave2 = document.getElementById('wave2');
+        let t = 0;
+        function animateWaves() {
+            t += 0.012;
+            // Animate wave1
+            let d1 = '';
+            for (let i = 0; i <= 1440; i += 80) {
+                let y = 160 + Math.sin((i / 1440) * 4 * Math.PI + t) * 18 + Math.cos((i / 1440) * 2 * Math.PI + t * 1.2) * 10;
+                d1 += (i === 0 ? 'M' : 'L') + i + ',' + y;
+            }
+            d1 += 'L1440,320L0,320Z';
+            wave1.setAttribute('d', d1);
+            // Animate wave2
+            let d2 = '';
+            for (let i = 0; i <= 1440; i += 80) {
+                let y = 200 + Math.sin((i / 1440) * 3 * Math.PI + t * 0.8) * 14 + Math.cos((i / 1440) * 2.5 * Math.PI + t * 1.5) * 8;
+                d2 += (i === 0 ? 'M' : 'L') + i + ',' + y;
+            }
+            d2 += 'L1440,320L0,320Z';
+            wave2.setAttribute('d', d2);
+            requestAnimationFrame(animateWaves);
+        }
+        animateWaves();
+
+        // --- Floating Bubbles ---
+        const heroBubbles = document.getElementById('heroBubbles');
+        for (let i = 0; i < 18; i++) {
+            const b = document.createElement('div');
+            b.className = 'hero-bubble';
+            const size = Math.random() * 32 + 18;
+            b.style.width = `${size}px`;
+            b.style.height = `${size}px`;
+            b.style.left = `${Math.random() * 100}%`;
+            b.style.bottom = `-${size + 10}px`;
+            b.style.opacity = Math.random() * 0.25 + 0.12;
+            b.style.animationDelay = `${Math.random() * 3}s`;
+            b.style.background = `linear-gradient(135deg, var(--primary), var(--secondary))`;
+            heroBubbles.appendChild(b);
+        }
+        // Bubble animation CSS
+        const style = document.createElement('style');
+        style.innerHTML = `
+    .hero-bubble {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+        animation: hero-bubble-rise 8s linear infinite;
+        filter: blur(0.5px);
+    }
+    @keyframes hero-bubble-rise {
+        0% { transform: translateY(0) scale(1); }
+        80% { opacity: 1; }
+        100% { transform: translateY(-320px) scale(1.15); opacity: 0; }
+    }
+    `;
+        document.head.appendChild(style);
+
+        // --- Water Ripple Effect ---
+        const rippleCanvas = document.getElementById('rippleCanvas');
+        function resizeRippleCanvas() {
+            rippleCanvas.width = rippleCanvas.offsetWidth;
+            rippleCanvas.height = rippleCanvas.offsetHeight;
+        }
+        window.addEventListener('resize', resizeRippleCanvas);
+        setTimeout(resizeRippleCanvas, 100); // Initial
+        // Draw ripple at (x, y)
+        function drawRipple(x, y) {
+            const ctx = rippleCanvas.getContext('2d');
+            const maxR = Math.max(rippleCanvas.width, rippleCanvas.height) * 0.5;
+            let r = 0;
+            let alpha = 0.35;
+            function animate() {
+                ctx.clearRect(0, 0, rippleCanvas.width, rippleCanvas.height);
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(x, y, r, 0, 2 * Math.PI);
+                ctx.strokeStyle = `rgba(139,92,246,${alpha})`;
+                ctx.lineWidth = 4 + 2 * (1 - r / maxR);
+                ctx.shadowColor = 'rgba(12,12,207,0.18)';
+                ctx.shadowBlur = 12;
+                ctx.stroke();
+                ctx.restore();
+                r += 8;
+                alpha *= 0.96;
+                if (alpha > 0.04 && r < maxR) {
+                    requestAnimationFrame(animate);
+                } else {
+                    ctx.clearRect(0, 0, rippleCanvas.width, rippleCanvas.height);
+                }
+            }
+            animate();
+        }
+        document.getElementById('heroBg').addEventListener('click', function (e) {
+            const rect = rippleCanvas.getBoundingClientRect();
+            const x = (e.clientX - rect.left) * (rippleCanvas.width / rect.width);
+            const y = (e.clientY - rect.top) * (rippleCanvas.height / rect.height);
+            drawRipple(x, y);
+        });
+    </script>
+    <!-- Color Palette Toggle Button -->
+    <button class="color-palette-btn" id="colorPaletteBtn" title="Change primary color">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" fill="url(#paletteGradient)" />
+            <defs>
+                <radialGradient id="paletteGradient" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#fff" />
+                    <stop offset="100%" stop-color="#8b5cf6" />
+                </radialGradient>
+            </defs>
+            <path d="M12 2v2" />
+            <path d="M12 20v2" />
+            <path d="M2 12h2" />
+            <path d="M20 12h2" />
+        </svg>
+    </button>
+    <!-- Popup Color Palette -->
+    <div id="colorPalettePopup" class="color-palette-popup" style="display:none;">
+        <!-- Swatches will be injected here -->
+    </div>
+    <style>
+        .color-palette-btn {
+            position: fixed;
+            bottom: 2.2rem;
+            right: 2.2rem;
+            z-index: 2000;
+            background: rgba(255, 255, 255, 0.18);
+            border: 1.5px solid rgba(139, 92, 246, 0.18);
+            box-shadow: 0 4px 18px rgba(12, 12, 207, 0.13);
+            border-radius: 50%;
+            width: 54px;
+            height: 54px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: box-shadow 0.2s, background 0.2s;
+            overflow: hidden;
+            backdrop-filter: blur(8px);
+        }
+
+        .color-palette-btn:hover {
+            box-shadow: 0 8px 32px rgba(139, 92, 246, 0.22);
+            background: rgba(139, 92, 246, 0.13);
+        }
+
+        .color-palette-btn svg {
+            pointer-events: none;
+        }
+
+        .color-palette-popup {
+            position: fixed;
+            bottom: 5.5rem;
+            right: 2.2rem;
+            z-index: 2100;
+            width: 160px;
+            height: 160px;
+            background: rgba(255, 255, 255, 0.18);
+            border-radius: 1.5rem;
+            box-shadow: 0 8px 32px rgba(12, 12, 207, 0.13);
+            border: 1.5px solid rgba(139, 92, 246, 0.18);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 10px;
+            padding: 18px 10px 10px 10px;
+            backdrop-filter: blur(12px);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(20px) scale(0.95);
+            transition: opacity 0.25s, transform 0.25s;
+            overflow-y: auto;
+            overflow-x: hidden;
+            scrollbar-width: none;
+        }
+
+        .color-palette-popup::-webkit-scrollbar {
+            display: none;
+        }
+
+        .color-palette-popup.open {
+            display: flex;
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0) scale(1);
+        }
+
+        .color-swatch {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2.5px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.15s;
+            outline: none;
+        }
+
+        .color-swatch.selected,
+        .color-swatch:focus {
+            box-shadow: 0 0 0 3px #fff, 0 2px 8px rgba(0, 0, 0, 0.12);
+            transform: scale(1.12);
+        }
+
+        .hero-bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            pointer-events: none;
+            border-radius: 0 0 2.5rem 2.5rem;
+        }
+    </style>
+    <script>
+        // 20 beautiful palette colors
+        const paletteColors = [
+            '#0c0ccf', '#8b5cf6', '#ec4899', '#f43f5e', '#10b981', '#f59e42', '#fbbf24', '#fde68a',
+            '#2563eb', '#1e293b', '#f8fafc', '#64748b', '#eab308', '#a21caf', '#be185d', '#0891b2',
+            '#22d3ee', '#f472b6', '#b91c1c', '#7c3aed'
+        ];
+        const colorPaletteBtn = document.getElementById('colorPaletteBtn');
+        const colorPalettePopup = document.getElementById('colorPalettePopup');
+        // Render swatches
+        colorPalettePopup.innerHTML = paletteColors.map(color =>
+            `<div class="color-swatch" tabindex="0" style="background:${color}" data-color="${color}"></div>`
+        ).join('');
+        // Popup logic
+        let popupOpen = false;
+        function openPalettePopup() {
+            // Highlight current
+            const current = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim().toLowerCase();
+            colorPalettePopup.querySelectorAll('.color-swatch').forEach(swatch => {
+                if (swatch.getAttribute('data-color').toLowerCase() === current) {
+                    swatch.classList.add('selected');
+                } else {
+                    swatch.classList.remove('selected');
+                }
+            });
+            colorPalettePopup.classList.add('open');
+            colorPalettePopup.style.display = 'flex';
+            popupOpen = true;
+        }
+        function closePalettePopup() {
+            colorPalettePopup.classList.remove('open');
+            setTimeout(() => { if (!popupOpen) colorPalettePopup.style.display = 'none'; }, 250);
+            popupOpen = false;
+        }
+        colorPaletteBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (popupOpen) {
+                closePalettePopup();
+            } else {
+                openPalettePopup();
+            }
+        });
+        // Swatch click logic
+        colorPalettePopup.addEventListener('click', (e) => {
+            const swatch = e.target.closest('.color-swatch');
+            if (swatch) {
+                document.documentElement.style.setProperty('--primary', swatch.getAttribute('data-color'));
+                updateWaveGradient && updateWaveGradient();
+                closePalettePopup();
+            }
+        });
+        // Keyboard accessibility
+        colorPalettePopup.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                const swatch = e.target.closest('.color-swatch');
+                if (swatch) {
+                    document.documentElement.style.setProperty('--primary', swatch.getAttribute('data-color'));
+                    updateWaveGradient && updateWaveGradient();
+                    closePalettePopup();
+                }
+            }
+        });
+        // Close popup on outside click
+        document.addEventListener('mousedown', (e) => {
+            if (popupOpen && !colorPalettePopup.contains(e.target) && !colorPaletteBtn.contains(e.target)) {
+                closePalettePopup();
+            }
+        });
+        // Optional: close on ESC
+        document.addEventListener('keydown', (e) => {
+            if (popupOpen && e.key === 'Escape') closePalettePopup();
+        });
+    </script>
+    <script>
+        // Bubble bounce effect for 'SAY HELLO TO ZIMBABWE'
+        window.addEventListener('DOMContentLoaded', function () {
+            const hello = document.querySelector('.hero-overlay-content');
+            if (hello) {
+                const text = hello.textContent.trim();
+                hello.innerHTML = text.split('').map((char, i) => {
+                    if (char === ' ') return ' ';
+                    return `<span class="bubble-bounce" style="animation-delay:${i * 0.08}s">${char}</span>`;
+                }).join('');
+            }
+        });
+    </script>
+</body>
+
+</html>

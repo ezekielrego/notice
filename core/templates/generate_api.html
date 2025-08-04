@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Noticeboard API Token Generator</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: 'Roboto', Arial, sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(60, 60, 120, 0.12);
+            padding: 2.5em 2em 2em 2em;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #3a3a7c;
+            margin-bottom: 0.2em;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            color: #6a6a8a;
+            font-size: 1.1em;
+            margin-bottom: 1.5em;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            margin: 1em 0 0.2em 0.1em;
+            color: #3a3a7c;
+            font-weight: 500;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 0.7em;
+            border: 1px solid #d1d1e0;
+            border-radius: 8px;
+            font-size: 1em;
+            margin-bottom: 0.5em;
+            transition: border 0.2s;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border: 1.5px solid #3a3a7c;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 0.9em;
+            background: linear-gradient(90deg, #3a3a7c 0%, #6a82fb 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 700;
+            margin-top: 1.2em;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(60, 60, 120, 0.08);
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            background: linear-gradient(90deg, #6a82fb 0%, #3a3a7c 100%);
+            box-shadow: 0 4px 16px rgba(60, 60, 120, 0.13);
+        }
+
+        .token-label {
+            font-weight: 600;
+            color: #3a3a7c;
+            margin-top: 1.2em;
+            margin-bottom: 0.2em;
+            text-align: left;
+        }
+
+        .token-box {
+            position: relative;
+            margin-bottom: 0.7em;
+        }
+
+        textarea {
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid #e0e0f0;
+            background: #f7f8fa;
+            font-size: 0.98em;
+            padding: 0.7em 2.5em 0.7em 0.7em;
+            resize: none;
+            color: #2a2a4a;
+            box-sizing: border-box;
+        }
+
+        .copy-icon-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            outline: none;
+            z-index: 2;
+        }
+
+        .copy-icon-btn svg {
+            width: 22px;
+            height: 22px;
+            fill: #6a6a8a;
+            transition: fill 0.2s;
+        }
+
+        .copy-icon-btn:hover svg {
+            fill: #3a3a7c;
+        }
+
+        .copied-tooltip {
+            position: absolute;
+            top: -28px;
+            right: 0;
+            background: #1a7c1a;
+            color: #fff;
+            padding: 2px 10px;
+            border-radius: 6px;
+            font-size: 0.95em;
+            font-weight: 500;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+
+        .copied-tooltip.show {
+            opacity: 1;
+        }
+
+        .instructions {
+            background: #f0f4ff;
+            color: #3a3a7c;
+            border-radius: 8px;
+            padding: 1em 1.2em;
+            margin-bottom: 2em;
+            font-size: 1em;
+            text-align: left;
+        }
+
+        .message {
+            margin-top: 1em;
+            padding: 0.8em 1em;
+            border-radius: 8px;
+            font-size: 1em;
+            text-align: left;
+        }
+
+        .message.success {
+            background: #e6fbe6;
+            color: #1a7c1a;
+            border: 1px solid #b2e6b2;
+        }
+
+        .message.error {
+            background: #ffeaea;
+            color: #b80000;
+            border: 1px solid #ffb2b2;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 1.2em 0.5em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="logo">Noticeboard API</div>
+        <div class="subtitle">Official Token Generator</div>
+        <div class="instructions">
+            <p>Enter your <b>username</b> and <b>password</b> to generate tokens for use in your projects.</p>
+            <ul>
+                <li><b>JWT Access Token</b>: Use for web/mobile app sessions. Expires after a short time, but can be
+                    refreshed.</li>
+                <li><b>Permanent API Token</b>: Use for integrations, background jobs, or trusted apps. <b>Never
+                        expires</b> unless deleted.</li>
+            </ul>
+            <p>Copy and use the tokens in your API requests as shown in the <code>API_DOCUMENTATION.md</code>.</p>
+        </div>
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="Enter your username">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter your password">
+        <button onclick="getTokens()">Get Tokens</button>
+        <div class="token-label">JWT Access Token</div>
+        <div class="token-box">
+            <textarea id="access_token" readonly onclick="this.select()"></textarea>
+            <button class="copy-icon-btn" onclick="copyToken('access_token', this)" title="Copy"><svg
+                    viewBox="0 0 24 24">
+                    <path
+                        d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                </svg></button>
+            <span class="copied-tooltip">Copied!</span>
+        </div>
+        <div class="token-label">JWT Refresh Token</div>
+        <div class="token-box">
+            <textarea id="refresh_token" readonly onclick="this.select()"></textarea>
+            <button class="copy-icon-btn" onclick="copyToken('refresh_token', this)" title="Copy"><svg
+                    viewBox="0 0 24 24">
+                    <path
+                        d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                </svg></button>
+            <span class="copied-tooltip">Copied!</span>
+        </div>
+        <div class="token-label">Permanent API Token</div>
+        <div class="token-box">
+            <textarea id="api_token" readonly onclick="this.select()"></textarea>
+            <button class="copy-icon-btn" onclick="copyToken('api_token', this)" title="Copy"><svg viewBox="0 0 24 24">
+                    <path
+                        d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                </svg></button>
+            <span class="copied-tooltip">Copied!</span>
+        </div>
+        <div id="token_response" class="message" style="display:none;"></div>
+    </div>
+    <script>
+        let baseUrl = 'http://127.0.0.1:8000/api/';
+        function showMessage(msg, type) {
+            const el = document.getElementById('token_response');
+            el.textContent = msg;
+            el.className = 'message ' + type;
+            el.style.display = 'block';
+        }
+        function clearMessage() {
+            const el = document.getElementById('token_response');
+            el.textContent = '';
+            el.style.display = 'none';
+        }
+        function copyToken(tokenId, btn) {
+            const textarea = document.getElementById(tokenId);
+            textarea.select();
+            textarea.setSelectionRange(0, 99999);
+            document.execCommand('copy');
+            // Show copied tooltip
+            const tooltip = btn.parentElement.querySelector('.copied-tooltip');
+            tooltip.classList.add('show');
+            setTimeout(() => { tooltip.classList.remove('show'); }, 1200);
+        }
+        function getTokens() {
+            clearMessage();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            if (!username || !password) {
+                showMessage('Please enter both username and password.', 'error');
+                return;
+            }
+            document.getElementById('access_token').value = '';
+            document.getElementById('refresh_token').value = '';
+            document.getElementById('api_token').value = '';
+            showMessage('Requesting tokens...', '');
+            // Get JWT tokens
+            fetch(baseUrl + 'token/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
+            })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.access) {
+                        document.getElementById('access_token').value = data.access;
+                        document.getElementById('refresh_token').value = data.refresh || '';
+                    } else if (data.detail) {
+                        showMessage(data.detail, 'error');
+                        return;
+                    } else {
+                        showMessage('JWT token error: ' + JSON.stringify(data), 'error');
+                        return;
+                    }
+                    // Get permanent API token
+                    fetch(baseUrl + 'api-token-auth/', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
+                    })
+                        .then(r2 => r2.json())
+                        .then(data2 => {
+                            if (data2.token) {
+                                document.getElementById('api_token').value = data2.token;
+                                showMessage('Tokens generated successfully.', 'success');
+                            } else if (data2.detail) {
+                                showMessage(data2.detail, 'error');
+                            } else {
+                                showMessage('Permanent API token error: ' + JSON.stringify(data2), 'error');
+                            }
+                        })
+                        .catch(e2 => {
+                            showMessage('Permanent API token error: ' + e2.toString(), 'error');
+                        });
+                })
+                .catch(e => {
+                    showMessage('JWT token error: ' + e.toString(), 'error');
+                });
+        }
+    </script>
+</body>
+
+</html>

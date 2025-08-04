@@ -1,0 +1,5 @@
+[TYPECHECK]
+generated-members=objects,username,get_full_name,get_day_display
+
+[MESSAGES CONTROL]
+disable=E1101,E1120 
